@@ -32,6 +32,39 @@
 }
 ```
 
+  This plugin uses [minimatch](https://github.com/isaacs/minimatch) to match files. If you want to specify options to minimatch, you can use the object constructor:
+
+```json
+{
+  "plugins": {
+    "metalsmith-ignore": {
+      "patterns": "*.swp",
+      "options": {
+        "matchBase": true,
+        "dot": true
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "plugins": {
+    "metalsmith-ignore": {
+      "patterns": [
+        "*.swp",
+        "drafts/*"
+      ],
+      "options": {
+        "matchBase": true,
+        "dot": true
+      }
+    }
+  }
+}
+```
+
 ## Javascript Usage
 
   Pass the options to `Metalsmith#use`:
@@ -51,6 +84,35 @@ metalsmith.use(ignore([
   'drafts/*',
   'unfinished/*'
 ]));
+```
+
+  And lastly you may pass options to the matching algorithm:
+
+```js
+var ignore = require('metalsmith-ignore');
+
+metalsmith.use(ignore({
+  'patterns': '*.swp',
+  'options': {
+    'matchBase': true,
+    'dot: true
+  }
+}));
+```
+
+```js
+var ignore = require('metalsmith-ignore');
+
+metalsmith.use(ignore({
+  'patterns': [
+    '*.swp',
+    'drafts/*'
+  ],
+  'options': {
+    'matchBase': true,
+    'dot: true
+  }
+}));
 ```
 
 ## License
